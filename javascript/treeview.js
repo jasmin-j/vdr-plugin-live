@@ -2,9 +2,9 @@
 // --- Name:    Easy DHTML Treeview           --
 // --- Author:  D.D. de Kerf                  --
 // --- Adapted: Jasmin Jessich                --
-// --- Adapted: hepi		                  --
+// --- Adapted: hepi (via patch)              --
 // --- Adapted: Diter Hametner                --
-// --- Version: 0.4          Date: 13-6-2017  --
+// --- Version: 0.4          Date: 14-6-2017  --
 // ---------------------------------------------
 
 function findSibling(node, name)
@@ -104,7 +104,7 @@ function updateCookieOnCollapse( id )
 	else
 		openNodes = [];
 	for (var z=0; z<openNodes.length; z++){
-		if (openNodes[z] === sibling.id){
+		if (openNodes[z] === id){
 			openNodes.splice(z,1);
 			break;
 		}
@@ -117,14 +117,13 @@ function openNodesOnPageLoad()
 {
 	var openNodes = readCookie( cookieNameRec );
 	if (openNodes != null && openNodes !== "")
-		openNodes = openNodes.split(",.,");
+		openNodes = openNodes.split(",");
 	else
 		openNodes = [];
 	for (var z=0; z<openNodes.length; z++){
 		var ul = document.getElementById(openNodes[z]);
 		if (ul){
 			ul.style.display = 'block';
-			//var imgChild = findChildNode(ul.parentNode, "recording_imgs");
 			var imgChild = ul.parentNode.children[0].children[0];
 			if (imgChild != null)
 				setImages(imgChild, "img/minus.png", "img/folder_open.png");
